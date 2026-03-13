@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        /* Custom base styles matching the dark theme */
+        body {
+            background-color: #09090b; /* zinc-950 */
+            color: #fafafa; /* zinc-50 */
+        }
+        .hidden-view {
+            display: none;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen font-sans selection:bg-zinc-700">
+
+    <nav class="border-b border-zinc-800 p-6 flex justify-between items-center sticky top-0 bg-[#09090b]/80 backdrop-blur-md z-50">
+        <div class="text-xl font-bold tracking-tighter flex items-center gap-2">
+            <i data-feather="camera" class="w-6 h-6"></i>
+            STUDIO
+        </div>
+        <div class="flex gap-4 md:gap-6 text-sm font-medium" id="nav-buttons">
+            <button data-target="portfolio" class="nav-btn text-white transition-colors hover:text-zinc-300">Portfolio</button>
+            <button data-target="galleries" class="nav-btn text-zinc-500 transition-colors hover:text-zinc-300">Client Galleries</button>
+            <button data-target="booking" class="nav-btn bg-zinc-800 text-white px-4 py-2 rounded-md hover:bg-zinc-700 transition-colors">Book Now</button>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto p-6 py-12">
+        
+        <section id="portfolio" class="view-section fade-in space-y-12">
+            <header class="space-y-4 max-w-2xl">
+                <h1 class="text-5xl font-bold tracking-tight">Capturing moments, creating memories.</h1>
+                <p class="text-zinc-400 text-lg">General portfolio showcasing landscape, portrait, and event photography.</p>
+            </header>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="aspect-[4/5] bg-zinc-900 rounded-lg overflow-hidden relative group">
+                    <div class="absolute inset-0 bg-zinc-800/50"></div>
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/40 transition-opacity duration-300">
+                        <i data-feather="image" class="w-8 h-8 text-zinc-400"></i>
+                    </div>
+                </div>
+                <div class="aspect-[4/5] bg-zinc-900 rounded-lg overflow-hidden relative group">
+                    <div class="absolute inset-0 bg-zinc-800/50"></div>
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/40 transition-opacity duration-300">
+                        <i data-feather="image" class="w-8 h-8 text-zinc-400"></i>
+                    </div>
+                </div>
+                 <div class="aspect-[4/5] bg-zinc-900 rounded-lg overflow-hidden relative group">
+                    <div class="absolute inset-0 bg-zinc-800/50"></div>
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/40 transition-opacity duration-300">
+                        <i data-feather="image" class="w-8 h-8 text-zinc-400"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="galleries" class="view-section hidden-view fade-in space-y-12">
+            <header class="space-y-4 max-w-2xl">
+                <h1 class="text-5xl font-bold tracking-tight">Client Access</h1>
+                <p class="text-zinc-400 text-lg">Secure, private galleries for our clients. Enter your collection password to access your high-resolution downloads.</p>
+            </header>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="border border-zinc-800 rounded-xl p-6 flex flex-col justify-between h-48 bg-zinc-900/50 hover:bg-zinc-900 transition-colors">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Smith Wedding</h3>
+                        <i data-feather="lock" class="w-5 h-5 text-zinc-500"></i>
+                    </div>
+                    <div class="flex gap-2">
+                        <input type="password" placeholder="Gallery Password..." class="bg-[#09090b] border border-zinc-800 rounded-md px-3 py-2 text-sm flex-1 outline-none focus:border-zinc-600 text-white">
+                        <button class="bg-white text-black p-2 rounded-md hover:bg-zinc-200 transition-colors">
+                            <i data-feather="arrow-right" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="border border-zinc-800 rounded-xl p-6 flex flex-col justify-between h-48 bg-zinc-900/50 hover:bg-zinc-900 transition-colors">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-semibold">Johnson Portrait</h3>
+                        <i data-feather="lock" class="w-5 h-5 text-zinc-500"></i>
+                    </div>
+                    <div class="flex gap-2">
+                        <input type="password" placeholder="Gallery Password..." class="bg-[#09090b] border border-zinc-800 rounded-md px-3 py-2 text-sm flex-1 outline-none focus:border-zinc-600 text-white">
+                        <button class="bg-white text-black p-2 rounded-md hover:bg-zinc-200 transition-colors">
+                            <i data-feather="arrow-right" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="booking" class="view-section hidden-view fade-in max-w-xl mx-auto space-y-8">
+            <header class="space-y-4 text-center">
+                <h1 class="text-4xl font-bold tracking-tight">Book a Session</h1>
+                <p class="text-zinc-400">Fill out the form below to check availability and schedule your shoot.</p>
+            </header>
+
+            <div id="booking-success" class="hidden-view bg-emerald-950/30 border border-emerald-900 text-emerald-400 p-6 rounded-xl flex flex-col items-center text-center space-y-4">
+                <i data-feather="check-circle" class="w-12 h-12"></i>
+                <div>
+                    <h3 class="text-xl font-semibold text-emerald-300">Request Sent</h3>
+                    <p class="text-emerald-500/80 mt-1">I will get back to you within 24 hours to confirm.</p>
+                </div>
+                <button id="reset-booking" class="text-sm underline mt-4 hover:text-emerald-300">Book another session</button>
+            </div>
+
+            <form id="booking-form" class="space-y-4 bg-zinc-900/50 p-8 rounded-2xl border border-zinc-800">
+                <div class="space-y-2">
+                    <label class="text-sm font-medium text-zinc-300">Name</label>
+                    <input required type="text" class="w-full bg-[#09090b] border border-zinc-800 rounded-lg px-4 py-3 outline-none focus:border-white transition-colors text-white" placeholder="John Doe">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-sm font-medium text-zinc-300">Email</label>
+                    <input required type="email" class="w-full bg-[#09090b] border border-zinc-800 rounded-lg px-4 py-3 outline-none focus:border-white transition-colors text-white" placeholder="john@example.com">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-sm font-medium text-zinc-300">Session Type</label>
+                    <select class="w-full bg-[#09090b] border border-zinc-800 rounded-lg px-4 py-3 outline-none focus:border-white transition-colors appearance-none text-white">
+                        <option>Portrait</option>
+                        <option>Wedding</option>
+                        <option>Event</option>
+                        <option>Commercial</option>
+                    </select>
+                </div>
+                <div class="space-y-2">
+                    <label class="text-sm font-medium text-zinc-300">Requested Date</label>
+                    <div class="relative">
+                        <i data-feather="calendar" class="absolute left-4 top-3.5 w-5 h-5 text-zinc-500"></i>
+                        <input required type="date" class="w-full bg-[#09090b] border border-zinc-800 rounded-lg pl-12 pr-4 py-3 outline-none focus:border-white transition-colors text-white color-scheme-dark" style="color-scheme: dark;">
+                    </div>
+                </div>
+                <div class="space-y-2">
+                    <label class="text-sm font-medium text-zinc-300">Details</label>
+                    <textarea required rows="4" class="w-full bg-[#09090b] border border-zinc-800 rounded-lg px-4 py-3 outline-none focus:border-white transition-colors resize-none text-white" placeholder="Tell me about your vision..."></textarea>
+                </div>
+                <button type="submit" class="w-full bg-white text-black font-semibold rounded-lg px-4 py-3 hover:bg-zinc-200 transition-colors mt-4">
+                    Submit Request
+                </button>
+            </form>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
