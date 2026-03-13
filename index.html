@@ -1,399 +1,301 @@
 <html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photography Portfolio | Nampa, ID</title>
+    <title>Elenora | Fine Art Photography</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Outfit:wght@200;300;400&display=swap');
+        
+        /* Smooth scrolling for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Hide scrollbar for gallery horizontal scroll if needed, but keeping it clean */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fafaf9; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d6d3d1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a29e; 
+        }
+
+        /* Utility for input auto-fill bg */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus, 
+        input:-webkit-autofill:active{
+            -webkit-box-shadow: 0 0 0 30px #fafaf9 inset !important;
+            -webkit-text-fill-color: #292524 !important;
+        }
+    </style>
 </head>
-<body class="bg-[#FCFBF9] text-zinc-800 font-sans antialiased selection:bg-zinc-200 selection:text-zinc-900">
+<body class="bg-[#fafaf9] text-stone-800 antialiased selection:bg-stone-200 selection:text-stone-900" style="font-family: 'Outfit', sans-serif;">
 
     <!-- Navigation -->
-    <nav class="sticky top-0 z-50 bg-[#FCFBF9]/80 backdrop-blur-md border-b border-zinc-200/50">
-        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="#" class="text-xl tracking-tight font-medium text-zinc-900">Emma Studio</a>
-            <div class="hidden md:flex items-center gap-8 text-sm font-light text-zinc-500">
-                <a href="#portfolio" class="hover:text-zinc-900 transition-colors">Portfolio</a>
-                <a href="#services" class="hover:text-zinc-900 transition-colors">Services</a>
-                <a href="#booking" class="hover:text-zinc-900 transition-colors">Book Session</a>
-                <a href="#client-area" class="hover:text-zinc-900 transition-colors flex items-center gap-2">
-                    <iconify-icon icon="solar:lock-keyhole-linear"></iconify-icon>
-                    Client Area
-                </a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="max-w-7xl mx-auto px-6 pt-32 pb-24 md:pt-48 md:pb-32 flex flex-col items-center text-center">
-        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 text-xs font-medium text-zinc-600 mb-8 border border-zinc-200/50">
-            <iconify-icon icon="solar:map-point-linear"></iconify-icon>
-            Based in Nampa, Idaho
-        </span>
-        <h1 class="text-4xl md:text-6xl lg:text-7xl tracking-tight font-medium text-zinc-900 max-w-4xl leading-tight mb-6">
-            Capturing authentic moments in soft, natural light.
-        </h1>
-        <p class="text-lg md:text-xl font-light text-zinc-500 max-w-2xl mb-10">
-            Specializing in portraits, couples, and lifestyle photography that feels timeless and true to you.
-        </p>
-        <div class="flex items-center gap-4">
-            <a href="#booking" class="bg-zinc-900 text-white px-6 py-3 rounded-xl text-sm font-medium hover:bg-zinc-800 transition-all flex items-center gap-2">
-                Book a session
-                <iconify-icon icon="solar:arrow-right-linear"></iconify-icon>
+    <header class="fixed top-0 inset-x-0 z-50 bg-[#fafaf9]/80 backdrop-blur-md border-b border-stone-200/50">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="text-2xl tracking-tighter text-stone-900" style="font-family: 'Cormorant Garamond', serif;">
+                ELENORA
             </a>
-            <a href="#portfolio" class="bg-white text-zinc-900 px-6 py-3 rounded-xl text-sm font-medium border border-zinc-200 hover:border-zinc-300 transition-all">
-                View portfolio
-            </a>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-light text-stone-500">
+                <a href="#about" class="hover:text-stone-900 transition-colors">About</a>
+                <a href="#portfolio" class="hover:text-stone-900 transition-colors">Portfolio</a>
+                <a href="#galleries" class="hover:text-stone-900 transition-colors">Client Galleries</a>
+                <a href="#book" class="text-stone-900 border-b border-stone-900 pb-0.5 hover:text-stone-500 hover:border-stone-500 transition-colors">Book a Session</a>
+            </nav>
+            <button class="md:hidden text-stone-800">
+                <iconify-icon icon="solar:hamburger-menu-linear" width="24" stroke-width="1.5"></iconify-icon>
+            </button>
         </div>
-    </section>
+    </header>
 
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="max-w-7xl mx-auto px-6 py-24">
-        <div class="flex items-end justify-between mb-12">
-            <div>
-                <h2 class="text-3xl tracking-tight font-medium text-zinc-900 mb-2">Selected Works</h2>
-                <p class="text-base font-light text-zinc-500">Recent sessions in the Treasure Valley area.</p>
-            </div>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[300px]">
-            <!-- Image 1 -->
-            <div class="group relative rounded-2xl overflow-hidden bg-zinc-100 lg:row-span-2">
-                <img src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="Portrait" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                <div class="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </div>
-            <!-- Image 2 -->
-            <div class="group relative rounded-2xl overflow-hidden bg-zinc-100">
-                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="Portrait" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            </div>
-            <!-- Image 3 -->
-            <div class="group relative rounded-2xl overflow-hidden bg-zinc-100">
-                <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="Couple" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            </div>
-            <!-- Image 4 -->
-            <div class="group relative rounded-2xl overflow-hidden bg-zinc-100 lg:col-span-2">
-                <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&amp;w=2000&amp;auto=format&amp;fit=crop" alt="Lifestyle" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            </div>
-             <!-- Image 5 -->
-             <div class="group relative rounded-2xl overflow-hidden bg-zinc-100">
-                <img src="https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="Detail" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            </div>
-        </div>
-    </section>
-
-    <!-- Services -->
-    <section id="services" class="border-y border-zinc-200/50 bg-white/50">
-        <div class="max-w-7xl mx-auto px-6 py-24">
-            <h2 class="text-3xl tracking-tight font-medium text-zinc-900 mb-12 text-center">Services &amp; Investment</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Service 1 -->
-                <div class="p-8 rounded-3xl bg-[#FCFBF9] border border-zinc-100">
-                    <iconify-icon icon="solar:camera-minimalistic-linear" class="text-3xl text-zinc-400 mb-6"></iconify-icon>
-                    <h3 class="text-xl tracking-tight font-medium text-zinc-900 mb-2">Portrait Session</h3>
-                    <p class="text-sm font-light text-zinc-500 mb-6">Perfect for seniors, branding, or creative solo shoots. 1 hour session, multiple outfits.</p>
-                    <p class="text-lg font-medium text-zinc-900">From $150</p>
+    <main>
+        <!-- Hero / About Section -->
+        <section id="about" class="pt-32 pb-24 md:pt-48 md:pb-32 px-6 max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 md:gap-24 items-center">
+                <div class="order-2 md:order-1 flex flex-col items-start">
+                    <span class="text-xs uppercase tracking-widest text-stone-400 mb-6 font-light">Photographer &amp; Storyteller</span>
+                    <h1 class="text-5xl md:text-7xl tracking-tight text-stone-900 mb-8 leading-[1.1]" style="font-family: 'Cormorant Garamond', serif;">
+                        Capturing light, love, &amp; the spaces in between.
+                    </h1>
+                    <p class="text-base text-stone-500 font-light leading-relaxed mb-10 max-w-md">
+                        Hi, I'm Elenora. I specialize in fine art wedding and lifestyle photography. My approach is rooted in capturing authentic moments with a soft, editorial touch, ensuring your memories are preserved in their most beautiful, timeless form.
+                    </p>
+                    <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&amp;w=2000&amp;auto=format&amp;fit=crop" alt="Elenora signature" class="h-12 opacity-40 grayscale mix-blend-multiply mb-8 object-cover object-left" style="width: 120px; border-radius: 4px;">
                 </div>
-                <!-- Service 2 -->
-                <div class="p-8 rounded-3xl bg-[#FCFBF9] border border-zinc-100">
-                    <iconify-icon icon="solar:users-group-two-rounded-linear" class="text-3xl text-zinc-400 mb-6"></iconify-icon>
-                    <h3 class="text-xl tracking-tight font-medium text-zinc-900 mb-2">Couples &amp; Engagements</h3>
-                    <p class="text-sm font-light text-zinc-500 mb-6">Capturing your unique connection. 1.5 hour session at a location of your choice.</p>
-                    <p class="text-lg font-medium text-zinc-900">From $200</p>
-                </div>
-                <!-- Service 3 -->
-                <div class="p-8 rounded-3xl bg-[#FCFBF9] border border-zinc-100">
-                    <iconify-icon icon="solar:home-smile-linear" class="text-3xl text-zinc-400 mb-6"></iconify-icon>
-                    <h3 class="text-xl tracking-tight font-medium text-zinc-900 mb-2">Lifestyle Family</h3>
-                    <p class="text-sm font-light text-zinc-500 mb-6">Relaxed, unposed moments with your loved ones. In-home or outdoor location.</p>
-                    <p class="text-lg font-medium text-zinc-900">From $250</p>
+                <div class="order-1 md:order-2">
+                    <div class="relative aspect-[3/4] w-full max-w-md mx-auto md:ml-auto rounded-sm overflow-hidden bg-stone-200">
+                        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/917d6f93-fb36-439a-8c48-884b67b35381_1600w.jpg" alt="Portrait of the photographer" class="w-full h-full object-cover">
+                        <!-- Subtle overlay -->
+                        <div class="absolute inset-0 bg-stone-900/5 mix-blend-overlay"></div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Booking Section (Functional UI) -->
-    <section id="booking" class="max-w-7xl mx-auto px-6 py-24">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl tracking-tight font-medium text-zinc-900 mb-4">Book Your Session</h2>
-                <p class="text-base font-light text-zinc-500">Select an available date below to start the booking process.</p>
+        <!-- Portfolio Showcase -->
+        <section id="portfolio" class="py-24 bg-white px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                    <div>
+                        <h2 class="text-4xl tracking-tight text-stone-900 mb-3" style="font-family: 'Cormorant Garamond', serif;">Selected Works</h2>
+                        <p class="text-sm font-light text-stone-500">A curation of my favorite moments captured recently.</p>
+                    </div>
+                    <a href="#" class="inline-flex items-center gap-2 text-sm font-light text-stone-900 hover:text-stone-500 transition-colors group">
+                        View all portfolio
+                        <iconify-icon icon="solar:arrow-right-linear" class="transform group-hover:translate-x-1 transition-transform" stroke-width="1.5"></iconify-icon>
+                    </a>
+                </div>
+
+                <!-- Masonry-style Grid using Flex/Columns for simplicity without JS -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                    <!-- Column 1 -->
+                    <div class="flex flex-col gap-4 md:gap-6">
+                        <div class="relative group overflow-hidden bg-stone-100 rounded-sm aspect-[3/4]">
+                            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&amp;w=1500&amp;auto=format&amp;fit=crop" alt="Wedding couple" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        </div>
+                        <div class="relative group overflow-hidden bg-stone-100 rounded-sm aspect-square">
+                            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&amp;w=1500&amp;auto=format&amp;fit=crop" alt="Floral details" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        </div>
+                    </div>
+                    <!-- Column 2 -->
+                    <div class="flex flex-col gap-4 md:gap-6">
+                        <div class="relative group overflow-hidden bg-stone-100 rounded-sm aspect-square">
+                            <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&amp;w=1500&amp;auto=format&amp;fit=crop" alt="Bride portrait" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        </div>
+                        <div class="relative group overflow-hidden bg-stone-100 rounded-sm aspect-[3/4]">
+                            <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&amp;w=1500&amp;auto=format&amp;fit=crop" alt="Engagement session" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        </div>
+                    </div>
+                    <!-- Column 3 -->
+                    <div class="flex flex-col gap-4 md:gap-6 lg:mt-12">
+                        <div class="relative group overflow-hidden bg-stone-100 rounded-sm aspect-[4/5]">
+                            <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&amp;w=1500&amp;auto=format&amp;fit=crop" alt="Couple holding hands" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        </div>
+                        <div class="relative group overflow-hidden bg-stone-100 rounded-sm aspect-video">
+                            <img src="https://images.unsplash.com/photo-1505932794465-147d1f1b2c97?q=80&amp;w=1500&amp;auto=format&amp;fit=crop" alt="Table setting details" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="bg-white rounded-3xl shadow-sm border border-zinc-200 overflow-hidden flex flex-col md:flex-row">
+        <!-- Client Galleries -->
+        <section id="galleries" class="py-24 px-6 bg-stone-100/50 border-y border-stone-200/50">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl tracking-tight text-stone-900 mb-4" style="font-family: 'Cormorant Garamond', serif;">Client Collections</h2>
+                    <p class="text-sm font-light text-stone-500 max-w-xl mx-auto">Access your full-resolution, curated wedding and lifestyle galleries. Each collection contains upwards of 150 edited photographs detailing your story.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Gallery Card 1 -->
+                    <a href="#" class="group block bg-white p-4 rounded-sm shadow-sm border border-stone-100 hover:shadow-md transition-all duration-300">
+                        <div class="relative aspect-[4/3] overflow-hidden mb-5 bg-stone-100">
+                            <img src="https://images.unsplash.com/photo-1532453288672-3a27e9be9efd?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="Sarah &amp; James" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-stone-900/10 group-hover:bg-transparent transition-colors duration-500"></div>
+                            <div class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-light text-stone-800 rounded-full flex items-center gap-1.5 shadow-sm">
+                                <iconify-icon icon="solar:gallery-linear" stroke-width="1.5"></iconify-icon>
+                                245 Photos
+                            </div>
+                        </div>
+                        <div class="px-2 pb-2 text-center">
+                            <h3 class="text-xl tracking-tight text-stone-900 mb-1" style="font-family: 'Cormorant Garamond', serif;">Sarah &amp; James</h3>
+                            <p class="text-xs text-stone-400 font-light">Tuscany Wedding • Sept 12, 2023</p>
+                        </div>
+                    </a>
+
+                    <!-- Gallery Card 2 -->
+                    <a href="#" class="group block bg-white p-4 rounded-sm shadow-sm border border-stone-100 hover:shadow-md transition-all duration-300">
+                        <div class="relative aspect-[4/3] overflow-hidden mb-5 bg-stone-100">
+                            <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="The Miller Family" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-stone-900/10 group-hover:bg-transparent transition-colors duration-500"></div>
+                            <div class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-light text-stone-800 rounded-full flex items-center gap-1.5 shadow-sm">
+                                <iconify-icon icon="solar:gallery-linear" stroke-width="1.5"></iconify-icon>
+                                180 Photos
+                            </div>
+                        </div>
+                        <div class="px-2 pb-2 text-center">
+                            <h3 class="text-xl tracking-tight text-stone-900 mb-1" style="font-family: 'Cormorant Garamond', serif;">The Miller Family</h3>
+                            <p class="text-xs text-stone-400 font-light">Coastal Session • Aug 05, 2023</p>
+                        </div>
+                    </a>
+
+                    <!-- Gallery Card 3 -->
+                    <a href="#" class="group block bg-white p-4 rounded-sm shadow-sm border border-stone-100 hover:shadow-md transition-all duration-300">
+                        <div class="relative aspect-[4/3] overflow-hidden mb-5 bg-stone-100">
+                            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4734259a-bad7-422f-981e-ce01e79184f2_1600w.jpg" alt="Emma &amp; Liam" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-stone-900/10 group-hover:bg-transparent transition-colors duration-500"></div>
+                            <div class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-light text-stone-800 rounded-full flex items-center gap-1.5 shadow-sm">
+                                <iconify-icon icon="solar:gallery-linear" stroke-width="1.5"></iconify-icon>
+                                310 Photos
+                            </div>
+                        </div>
+                        <div class="px-2 pb-2 text-center">
+                            <h3 class="text-xl tracking-tight text-stone-900 mb-1" style="font-family: 'Cormorant Garamond', serif;">Emma &amp; Liam</h3>
+                            <p class="text-xs text-stone-400 font-light">City Elopement • July 22, 2023</p>
+                        </div>
+                    </a>
+                </div>
                 
-                <!-- Calendar Side -->
-                <div class="w-full md:w-1/2 p-8 border-b md:border-b-0 md:border-r border-zinc-200 bg-[#FCFBF9]">
-                    <div class="flex items-center justify-between mb-6">
-                        <h3 id="calendar-month-year" class="text-lg tracking-tight font-medium text-zinc-900"></h3>
-                        <div class="flex gap-2">
-                            <button id="prev-month" class="p-2 rounded-lg hover:bg-zinc-200/50 text-zinc-500 transition-colors">
-                                <iconify-icon icon="solar:alt-arrow-left-linear"></iconify-icon>
-                            </button>
-                            <button id="next-month" class="p-2 rounded-lg hover:bg-zinc-200/50 text-zinc-500 transition-colors">
-                                <iconify-icon icon="solar:alt-arrow-right-linear"></iconify-icon>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="grid grid-cols-7 gap-1 text-center mb-2">
-                        <div class="text-xs font-medium text-zinc-400 py-2">Su</div>
-                        <div class="text-xs font-medium text-zinc-400 py-2">Mo</div>
-                        <div class="text-xs font-medium text-zinc-400 py-2">Tu</div>
-                        <div class="text-xs font-medium text-zinc-400 py-2">We</div>
-                        <div class="text-xs font-medium text-zinc-400 py-2">Th</div>
-                        <div class="text-xs font-medium text-zinc-400 py-2">Fr</div>
-                        <div class="text-xs font-medium text-zinc-400 py-2">Sa</div>
-                    </div>
-                    
-                    <div id="calendar-grid" class="grid grid-cols-7 gap-1">
-                        <!-- Dates generated via JS -->
-                    </div>
-                    
-                    <div class="mt-6 flex items-center gap-4 text-xs font-light text-zinc-500 justify-center">
-                        <div class="flex items-center gap-1.5"><div class="w-2 h-2 rounded-full bg-zinc-900"></div> Available</div>
-                        <div class="flex items-center gap-1.5"><div class="w-2 h-2 rounded-full bg-zinc-200"></div> Booked/Past</div>
-                    </div>
-                </div>
-
-                <!-- Form Side -->
-                <div class="w-full md:w-1/2 p-8 relative">
-                    
-                    <!-- Default State (No date selected) -->
-                    <div id="form-empty-state" class="absolute inset-0 flex flex-col items-center justify-center text-center p-8 bg-white z-10">
-                        <iconify-icon icon="solar:calendar-date-linear" class="text-4xl text-zinc-200 mb-4"></iconify-icon>
-                        <p class="text-sm font-light text-zinc-500">Please select an available date from the calendar to view booking options.</p>
-                    </div>
-
-                    <!-- Success State -->
-                    <div id="form-success-state" class="absolute inset-0 flex flex-col items-center justify-center text-center p-8 bg-white z-20 hidden">
-                        <div class="w-12 h-12 rounded-full bg-green-50 text-green-600 flex items-center justify-center mb-4">
-                            <iconify-icon icon="solar:check-circle-linear" class="text-2xl"></iconify-icon>
-                        </div>
-                        <h4 class="text-xl tracking-tight font-medium text-zinc-900 mb-2">Request Sent!</h4>
-                        <p class="text-sm font-light text-zinc-500 mb-6">Your email client has been opened to send the request. The date has been marked as pending on the calendar.</p>
-                        <button id="reset-booking" class="text-sm font-medium text-zinc-900 underline underline-offset-4 decoration-zinc-300 hover:decoration-zinc-900 transition-colors">Book another date</button>
-                    </div>
-
-                    <!-- Actual Form -->
-                    <form id="booking-form" class="flex flex-col h-full justify-between">
-                        <div>
-                            <div class="mb-6 pb-6 border-b border-zinc-100 flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-xl bg-[#FCFBF9] border border-zinc-200 flex items-center justify-center text-zinc-900">
-                                    <iconify-icon icon="solar:calendar-mark-linear"></iconify-icon>
-                                </div>
-                                <div>
-                                    <p class="text-xs font-light text-zinc-500 uppercase tracking-wider mb-0.5">Selected Date</p>
-                                    <p id="display-selected-date" class="text-sm font-medium text-zinc-900"></p>
-                                    <input type="hidden" id="hidden-date-input" required="">
-                                </div>
-                            </div>
-
-                            <div class="space-y-4">
-                                <div>
-                                    <label class="block text-xs font-medium text-zinc-700 mb-1.5">Full Name</label>
-                                    <input type="text" id="client-name" required="" class="w-full bg-[#FCFBF9] border border-zinc-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-900 transition-all" placeholder="Jane Doe">
-                                </div>
-                                
-                                <div class="relative">
-                                    <label class="block text-xs font-medium text-zinc-700 mb-1.5">Session Type</label>
-                                    <select id="session-type" required="" class="w-full bg-[#FCFBF9] border border-zinc-200 rounded-xl px-4 py-2.5 text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-900 transition-all text-zinc-800">
-                                        <option value="Portrait">Portrait Session</option>
-                                        <option value="Couples">Couples / Engagement</option>
-                                        <option value="Family">Lifestyle Family</option>
-                                    </select>
-                                    <iconify-icon icon="solar:alt-arrow-down-linear" class="absolute right-4 top-[34px] text-zinc-400 pointer-events-none"></iconify-icon>
-                                </div>
-
-                                <div>
-                                    <label class="block text-xs font-medium text-zinc-700 mb-1.5">A bit about your vision</label>
-                                    <textarea id="session-notes" rows="3" class="w-full bg-[#FCFBF9] border border-zinc-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-900 transition-all resize-none" placeholder="Location ideas, specific shots..."></textarea>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="w-full mt-6 bg-zinc-900 text-white py-3 rounded-xl text-sm font-medium hover:bg-zinc-800 transition-all flex items-center justify-center gap-2">
-                            Request Booking
-                            <iconify-icon icon="solar:letter-linear"></iconify-icon>
-                        </button>
-                    </form>
+                <div class="mt-12 text-center">
+                    <a href="#" class="inline-flex items-center gap-2 px-6 py-3 bg-white border border-stone-200 text-sm font-light text-stone-600 rounded-sm hover:border-stone-400 hover:text-stone-900 transition-all">
+                        Client Login Area
+                        <iconify-icon icon="solar:lock-keyhole-linear" stroke-width="1.5"></iconify-icon>
+                    </a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Client Galleries Bonus Section -->
-    <section id="client-area" class="border-t border-zinc-200/50 bg-[#f9f8f6]">
-        <div class="max-w-7xl mx-auto px-6 py-24 text-center">
-            <iconify-icon icon="solar:gallery-favourite-linear" class="text-4xl text-zinc-300 mb-6"></iconify-icon>
-            <h2 class="text-3xl tracking-tight font-medium text-zinc-900 mb-4">Client Galleries</h2>
-            <p class="text-base font-light text-zinc-500 max-w-xl mx-auto mb-10">Astounding high-resolution galleries delivered directly to you. Enter your private collection password below.</p>
-            
-            <form class="max-w-sm mx-auto flex gap-2" onsubmit="event.preventDefault(); alert('In a full version, this would unlock your private gallery!');">
-                <input type="password" placeholder="Gallery Password" class="flex-1 bg-white border border-zinc-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-zinc-400 transition-colors">
-                <button type="submit" class="bg-white text-zinc-900 border border-zinc-200 px-6 py-2.5 rounded-xl text-sm font-medium hover:bg-zinc-50 transition-colors">
-                    Access
-                </button>
-            </form>
-        </div>
-    </section>
+        <!-- Booking Section -->
+        <section id="book" class="py-32 px-6 relative overflow-hidden">
+            <!-- Decorative background element -->
+            <div class="absolute top-0 right-0 w-1/2 h-full bg-stone-100/30 -z-10 blur-3xl rounded-full transform translate-x-1/2 -translate-y-1/4"></div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-5 gap-16 items-start">
+                    <div class="md:col-span-2">
+                        <h2 class="text-5xl tracking-tight text-stone-900 mb-6 leading-tight" style="font-family: 'Cormorant Garamond', serif;">Let's create something beautiful.</h2>
+                        <p class="text-sm font-light text-stone-500 mb-10 leading-relaxed">
+                            Currently booking for 2024 &amp; 2025. Please fill out the form with as much detail as possible, and I'll get back to you within 48 hours with my pricing guide and availability.
+                        </p>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-4 text-sm font-light text-stone-600">
+                                <div class="w-10 h-10 rounded-full bg-white border border-stone-200 flex items-center justify-center text-stone-400">
+                                    <iconify-icon icon="solar:letter-linear" width="18" stroke-width="1.5"></iconify-icon>
+                                </div>
+                                hello@elenoraphoto.com
+                            </div>
+                            <div class="flex items-center gap-4 text-sm font-light text-stone-600">
+                                <div class="w-10 h-10 rounded-full bg-white border border-stone-200 flex items-center justify-center text-stone-400">
+                                    <iconify-icon icon="solar:map-point-linear" width="18" stroke-width="1.5"></iconify-icon>
+                                </div>
+                                Based in Portland, available worldwide.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-3 bg-white p-8 md:p-10 rounded-sm shadow-sm border border-stone-100">
+                        <form class="space-y-8">
+                            <div class="grid grid-cols-2 gap-6">
+                                <div class="space-y-2">
+                                    <label for="fname" class="text-xs uppercase tracking-widest text-stone-400">First Name</label>
+                                    <input type="text" id="fname" class="w-full bg-transparent border-b border-stone-200 py-2 text-sm text-stone-900 placeholder:text-stone-300 focus:outline-none focus:border-stone-500 transition-colors font-light" placeholder="Jane" required="">
+                                </div>
+                                <div class="space-y-2">
+                                    <label for="lname" class="text-xs uppercase tracking-widest text-stone-400">Last Name</label>
+                                    <input type="text" id="lname" class="w-full bg-transparent border-b border-stone-200 py-2 text-sm text-stone-900 placeholder:text-stone-300 focus:outline-none focus:border-stone-500 transition-colors font-light" placeholder="Doe" required="">
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label for="email" class="text-xs uppercase tracking-widest text-stone-400">Email Address</label>
+                                <input type="email" id="email" class="w-full bg-transparent border-b border-stone-200 py-2 text-sm text-stone-900 placeholder:text-stone-300 focus:outline-none focus:border-stone-500 transition-colors font-light" placeholder="jane@example.com" required="">
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-6">
+                                <div class="space-y-2">
+                                    <label for="inquiryType" class="text-xs uppercase tracking-widest text-stone-400">Inquiry Type</label>
+                                    <div class="relative">
+                                        <select id="inquiryType" class="w-full appearance-none bg-transparent border-b border-stone-200 py-2 text-sm text-stone-900 focus:outline-none focus:border-stone-500 transition-colors font-light cursor-pointer">
+                                            <option value="" disabled="" selected="" class="text-stone-300">Select an option</option>
+                                            <option value="wedding">Wedding</option>
+                                            <option value="elopement">Elopement</option>
+                                            <option value="portrait">Portrait / Lifestyle</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                        <div class="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-stone-400">
+                                            <iconify-icon icon="solar:alt-arrow-down-linear" stroke-width="1.5"></iconify-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="space-y-2">
+                                    <label for="date" class="text-xs uppercase tracking-widest text-stone-400">Proposed Date</label>
+                                    <input type="text" id="date" class="w-full bg-transparent border-b border-stone-200 py-2 text-sm text-stone-900 placeholder:text-stone-300 focus:outline-none focus:border-stone-500 transition-colors font-light" placeholder="MM/DD/YYYY or Season">
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label for="details" class="text-xs uppercase tracking-widest text-stone-400">Tell me about your vision</label>
+                                <textarea id="details" rows="3" class="w-full bg-transparent border-b border-stone-200 py-2 text-sm text-stone-900 placeholder:text-stone-300 focus:outline-none focus:border-stone-500 transition-colors font-light resize-none" placeholder="Location, vibe, guest count, what drew you to my work..."></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-stone-900 text-white text-sm py-4 px-6 hover:bg-stone-800 transition-colors font-light flex items-center justify-center gap-2 group">
+                                Send Inquiry
+                                <iconify-icon icon="solar:plain-linear" class="transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" stroke-width="1.5"></iconify-icon>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-zinc-200/50 py-12">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-            <p class="text-sm font-medium text-zinc-900">Emma Studio.</p>
-            <div class="flex items-center gap-6 text-xl text-zinc-400">
-                <a href="#" class="hover:text-zinc-900 transition-colors"><iconify-icon icon="solar:camera-linear"></iconify-icon></a>
-                <a href="#" class="hover:text-zinc-900 transition-colors"><iconify-icon icon="solar:letter-opened-linear"></iconify-icon></a>
+    <footer class="border-t border-stone-200/60 bg-[#fafaf9] py-12 px-6">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="text-xl tracking-tighter text-stone-900" style="font-family: 'Cormorant Garamond', serif;">
+                ELENORA
             </div>
-            <p class="text-xs font-light text-zinc-500">© <span id="year"></span> All rights reserved. Nampa, ID.</p>
+            <div class="text-xs text-stone-400 font-light">
+                © 2024 Elenora Photography. All rights reserved.
+            </div>
+            <div class="flex items-center gap-4 text-stone-400">
+                <a href="#" class="hover:text-stone-900 transition-colors"><iconify-icon icon="solar:camera-linear" width="20" stroke-width="1.5"></iconify-icon></a>
+                <a href="#" class="hover:text-stone-900 transition-colors"><iconify-icon icon="solar:heart-linear" width="20" stroke-width="1.5"></iconify-icon></a>
+                <a href="#" class="hover:text-stone-900 transition-colors"><iconify-icon icon="solar:link-linear" width="20" stroke-width="1.5"></iconify-icon></a>
+            </div>
         </div>
     </footer>
 
-    <!-- Booking Logic script -->
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        // --- Calendar & Booking State Logic ---
-        const calendarGrid = document.getElementById('calendar-grid');
-        const monthYearDisplay = document.getElementById('calendar-month-year');
-        const prevBtn = document.getElementById('prev-month');
-        const nextBtn = document.getElementById('next-month');
-        
-        const formEmptyState = document.getElementById('form-empty-state');
-        const formSuccessState = document.getElementById('form-success-state');
-        const displaySelectedDate = document.getElementById('display-selected-date');
-        const hiddenDateInput = document.getElementById('hidden-date-input');
-        const bookingForm = document.getElementById('booking-form');
-        const resetBtn = document.getElementById('reset-booking');
-
-        let currentDate = new Date();
-        // Simulate a database of booked dates using LocalStorage so it persists and feels functional
-        let bookedDates = JSON.parse(localStorage.getItem('emmaBookedDates')) || [];
-        let currentlySelectedDate = null;
-
-        const photographerEmail = "hello@examplephotographer.com"; // Replace with actual email
-
-        function renderCalendar() {
-            calendarGrid.innerHTML = '';
-            
-            const year = currentDate.getFullYear();
-            const month = currentDate.getMonth();
-            
-            const firstDay = new Date(year, month, 1);
-            const lastDay = new Date(year, month + 1, 0);
-            
-            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-            monthYearDisplay.textContent = `${monthNames[month]} ${year}`;
-            
-            // Padding for first day
-            for (let i = 0; i < firstDay.getDay(); i++) {
-                const emptyDiv = document.createElement('div');
-                calendarGrid.appendChild(emptyDiv);
-            }
-            
-            const today = new Date();
-            today.setHours(0,0,0,0);
-
-            for (let day = 1; day <= lastDay.getDate(); day++) {
-                const dateElement = document.createElement('button');
-                dateElement.className = 'w-10 h-10 mx-auto rounded-full flex items-center justify-center text-sm transition-all relative';
-                
-                const dateObj = new Date(year, month, day);
-                const dateString = dateObj.toISOString().split('T')[0];
-                
-                dateElement.textContent = day;
-                dateElement.type = 'button'; // Prevent form submission if inside a form accidentally
-
-                const isPast = dateObj < today;
-                const isBooked = bookedDates.includes(dateString);
-
-                if (isPast || isBooked) {
-                    dateElement.classList.add('text-zinc-300', 'cursor-not-allowed', 'bg-zinc-50/50');
-                    if (isBooked) {
-                        // Strikethrough for booked
-                        const line = document.createElement('div');
-                        line.className = 'absolute w-6 h-[1px] bg-zinc-300 rotate-45';
-                        dateElement.appendChild(line);
-                    }
-                    dateElement.disabled = true;
-                } else {
-                    // Available date
-                    dateElement.classList.add('text-zinc-700', 'hover:bg-zinc-100', 'hover:text-zinc-900', 'font-medium');
-                    
-                    if (currentlySelectedDate === dateString) {
-                        dateElement.classList.remove('hover:bg-zinc-100', 'text-zinc-700');
-                        dateElement.classList.add('bg-zinc-900', 'text-white', 'hover:bg-zinc-800');
-                    }
-
-                    dateElement.addEventListener('click', () => {
-                        currentlySelectedDate = dateString;
-                        updateFormState(dateObj);
-                        renderCalendar(); // re-render to highlight selection
-                    });
-                }
-                
-                calendarGrid.appendChild(dateElement);
-            }
-        }
-
-        function updateFormState(dateObj) {
-            if (currentlySelectedDate) {
-                formEmptyState.classList.add('hidden');
-                formSuccessState.classList.add('hidden');
-                
-                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                displaySelectedDate.textContent = dateObj.toLocaleDateString(undefined, options);
-                hiddenDateInput.value = currentlySelectedDate;
-            } else {
-                formEmptyState.classList.remove('hidden');
-                formSuccessState.classList.add('hidden');
-            }
-        }
-
-        prevBtn.addEventListener('click', () => {
-            currentDate.setMonth(currentDate.getMonth() - 1);
-            renderCalendar();
-        });
-
-        nextBtn.addEventListener('click', () => {
-            currentDate.setMonth(currentDate.getMonth() + 1);
-            renderCalendar();
-        });
-
-        // Form Submission Logic
-        bookingForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const name = document.getElementById('client-name').value;
-            const type = document.getElementById('session-type').value;
-            const notes = document.getElementById('session-notes').value;
-            const date = hiddenDateInput.value;
-
-            // 1. "Update available dates" (Simulated via LocalStorage)
-            bookedDates.push(date);
-            localStorage.setItem('emmaBookedDates', JSON.stringify(bookedDates));
-            
-            // Reset selection
-            currentlySelectedDate = null;
-            renderCalendar(); // Shows the date as crossed out now
-            
-            // 2. "Sends an email to me" (via mailto)
-            const subject = encodeURIComponent(`Booking Request: ${type} Session - ${name}`);
-            const body = encodeURIComponent(
-                `Hi Emma,\n\nI would like to book a ${type} session on ${date}.\n\nDetails:\nName: ${name}\nVision: ${notes}\n\nLooking forward to hearing from you!`
-            );
-            window.location.href = `mailto:${photographerEmail}?subject=${subject}&body=${body}`;
-
-            // 3. Show Success State
-            formSuccessState.classList.remove('hidden');
-            bookingForm.reset();
-        });
-
-        resetBtn.addEventListener('click', () => {
-            updateFormState(null); // Back to empty state
-        });
-
-        // Initialize
-        renderCalendar();
-    </script>
 
 </body></html>
