@@ -6,6 +6,10 @@
     <title>Addie McCain | Great Photography</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Outfit:wght@200;300;400&display=swap');
         
@@ -89,7 +93,6 @@
                             <iconify-icon icon="solar:arrow-right-linear" class="transform group-hover:translate-x-1 transition-transform" stroke-width="1.5"></iconify-icon>
                         </a>
                     </div>
-
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                         <div class="flex flex-col gap-4 md:gap-6">
                             <div class="relative group overflow-hidden bg-stone-100 rounded-sm aspect-[3/4]">
@@ -232,13 +235,34 @@
             <iconify-icon icon="solar:arrow-left-linear" stroke-width="1.5"></iconify-icon>
             Back to Main Site
         </button>
-        <div class="mb-12">
-            <h2 id="gallery-title" class="text-4xl md:text-5xl tracking-tight text-stone-900 mb-3" style="font-family: 'Cormorant Garamond', serif;">Client Collection</h2>
-            <p id="gallery-subtitle" class="text-sm font-light text-stone-500">Thank you for letting me capture these moments.</p>
+        
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+            <div>
+                <h2 id="gallery-title" class="text-4xl md:text-5xl tracking-tight text-stone-900 mb-2" style="font-family: 'Cormorant Garamond', serif;">Client Collection</h2>
+                <p id="gallery-subtitle" class="text-sm font-light text-stone-500">Thank you for letting me capture these moments.</p>
+            </div>
+            
+            <button onclick="downloadZip()" id="zip-button" class="inline-flex items-center gap-2 px-6 py-3 bg-stone-900 text-white text-sm font-light rounded-sm hover:bg-stone-800 transition-all shadow-sm">
+                <iconify-icon icon="solar:folder-zip-linear" width="20"></iconify-icon>
+                <span id="zip-text">Download Collection (ZIP)</span>
+            </button>
         </div>
         
         <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
             </div>
+    </div>
+
+    <div id="lightbox" class="fixed inset-0 z-[110] hidden bg-stone-900/95 backdrop-blur-md flex-col items-center justify-center p-6">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white/70 hover:text-white transition-colors">
+            <iconify-icon icon="solar:close-circle-linear" width="36" stroke-width="1.5"></iconify-icon>
+        </button>
+        
+        <img id="lightbox-img" src="" alt="Full screen gallery photo" class="max-h-[75vh] max-w-full object-contain mb-8 shadow-2xl rounded-sm">
+        
+        <button onclick="downloadSingleImage()" class="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 text-white text-sm font-light rounded-full backdrop-blur-md transition-colors border border-white/20">
+            <iconify-icon icon="solar:download-linear" width="18"></iconify-icon>
+            Download High-Res Photo
+        </button>
     </div>
 
     <div id="passwordModal" class="fixed inset-0 z-[100] hidden items-center justify-center px-6">
@@ -261,6 +285,8 @@
 
     <script>
         let currentGalleryId = '';
+        let currentGalleryImages = [];
+        let currentImageIndex = 0;
 
         // Password & Data Database
         const galleryConfig = {
@@ -268,7 +294,7 @@
                 password: 'hello',
                 title: 'Hayden & Megan',
                 subtitle: 'Couples Photo Shoot • Sept 12, 2023',
-                photoCount: 16 // Number of filler photos to generate
+                photoCount: 16
             },
             'storlie-family': {
                 password: 'family2026',
@@ -317,26 +343,33 @@
         }
 
         function showGalleryView(id, config) {
-            // Hide home view, show gallery view
             document.getElementById('home-view').classList.add('hidden');
             document.getElementById('gallery-view').classList.remove('hidden');
             window.scrollTo(0, 0);
 
-            // Set Title & Subtitle
             document.getElementById('gallery-title').innerText = config.title;
             document.getElementById('gallery-subtitle').innerText = config.subtitle;
 
-            // Generate filler photos using an image placeholder service (Picsum)
+            currentGalleryImages = [];
             const grid = document.getElementById('gallery-grid');
             let photosHTML = '';
             
             for (let i = 1; i <= config.photoCount; i++) {
-                // Using a unique seed based on the gallery ID and index so the images stay consistent per gallery
+                // High-res for download/lightbox, lower-res for thumbnail grid
+                const hdUrl = `https://picsum.photos/seed/${id}${i}/1200/1500`;
+                const thumbUrl = `https://picsum.photos/seed/${id}${i}/600/750`;
+                const fileName = `${id}-photo-${i}.jpg`;
+                
+                currentGalleryImages.push({ url: hdUrl, name: fileName });
+                
                 photosHTML += `
-                    <div class="relative group overflow-hidden bg-stone-100 rounded-sm aspect-[4/5] cursor-pointer">
-                        <img src="https://picsum.photos/seed/${id}${i}/800/1000" alt="Gallery Photo ${i}" 
+                    <div onclick="openLightbox(${i-1})" class="relative group overflow-hidden bg-stone-100 rounded-sm aspect-[4/5] cursor-pointer">
+                        <img src="${thumbUrl}" alt="Gallery Photo ${i}" 
                              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                        <div class="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/10 transition-colors duration-500"></div>
+                        <div class="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/20 transition-colors duration-500"></div>
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                             <iconify-icon icon="solar:maximize-square-linear" class="text-white drop-shadow-md" width="32"></iconify-icon>
+                        </div>
                     </div>
                 `;
             }
@@ -344,18 +377,89 @@
         }
 
         function closeGallery() {
-            // Hide gallery view, show home view
             document.getElementById('gallery-view').classList.add('hidden');
             document.getElementById('home-view').classList.remove('hidden');
-            
-            // Scroll back down to the galleries section
             document.getElementById('galleries').scrollIntoView({ behavior: 'smooth' });
-            
-            // Clear the grid to save memory
             document.getElementById('gallery-grid').innerHTML = '';
         }
 
-        // Event listener for Enter key on password input
+        /* --- Lightbox Logic --- */
+        function openLightbox(index) {
+            currentImageIndex = index;
+            document.getElementById('lightbox-img').src = currentGalleryImages[index].url;
+            document.getElementById('lightbox').classList.remove('hidden');
+            document.getElementById('lightbox').classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.add('hidden');
+            document.getElementById('lightbox').classList.remove('flex');
+            document.body.style.overflow = 'auto';
+        }
+
+        /* --- Download Logic --- */
+        async function forceDownload(url, filename) {
+            try {
+                // Fetch the image as a blob to force download instead of opening in a new tab
+                const response = await fetch(url);
+                const blob = await response.blob();
+                const blobUrl = window.URL.createObjectURL(blob);
+                
+                const link = document.createElement('a');
+                link.href = blobUrl;
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                window.URL.revokeObjectURL(blobUrl);
+            } catch (error) {
+                console.error('Download failed due to CORS. Opening in new tab instead.', error);
+                window.open(url, '_blank');
+            }
+        }
+
+        function downloadSingleImage() {
+            const imgData = currentGalleryImages[currentImageIndex];
+            forceDownload(imgData.url, imgData.name);
+        }
+
+        async function downloadZip() {
+            const btn = document.getElementById('zip-button');
+            const btnText = document.getElementById('zip-text');
+            const originalText = btnText.innerText;
+            
+            btn.classList.add('opacity-70', 'cursor-not-allowed');
+            btnText.innerText = 'Preparing ZIP (This may take a moment)...';
+            
+            try {
+                const zip = new JSZip();
+                const folder = zip.folder(`${currentGalleryId}-collection`);
+                
+                // Fetch all images concurrently
+                const fetchPromises = currentGalleryImages.map(async (img) => {
+                    const response = await fetch(img.url);
+                    const blob = await response.blob();
+                    folder.file(img.name, blob);
+                });
+                
+                await Promise.all(fetchPromises);
+                
+                btnText.innerText = 'Zipping files...';
+                const content = await zip.generateAsync({ type: "blob" });
+                
+                // Trigger download
+                saveAs(content, `${currentGalleryId}-collection.zip`);
+                
+            } catch (error) {
+                console.error("Error creating ZIP", error);
+                alert("There was an issue creating the ZIP. (Note: The placeholder images sometimes block batch downloads due to server restrictions, but it will work once you plug your own hosted photos in!)");
+            } finally {
+                btnText.innerText = originalText;
+                btn.classList.remove('opacity-70', 'cursor-not-allowed');
+            }
+        }
+
         document.getElementById('galleryPassword').addEventListener('keypress', (e) => {
             if (e.key === 'Enter') verifyPassword();
         });
