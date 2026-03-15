@@ -55,7 +55,7 @@
                         </p>
                     </div>
                     <div class="order-1 md:order-2">
-                            <div class="relative aspect-[3/4] w-full max-w-md mx-auto md:ml-auto rounded-sm overflow-hidden bg-stone-200 shadow-xl">
+                        <div class="relative aspect-[3/4] w-full max-w-md mx-auto md:ml-auto rounded-sm overflow-hidden bg-stone-200 shadow-xl">
                             <img src="cover-photos/001.jpg" class="w-full h-full object-cover">
                         </div>
                     </div>
@@ -63,17 +63,17 @@
             </section>
 
             <section id="portfolio" class="py-24 bg-white px-6">
-            <div class="max-w-7xl mx-auto">
-                <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-                    <div>
-                        <h2 class="text-4xl tracking-tight text-stone-900 mb-3" style="font-family: 'Cormorant Garamond', serif;">My Work</h2>
-                        <p class="text-sm font-light text-stone-500">A curation of my favorite moments captured recently.</p>
+                <div class="max-w-7xl mx-auto">
+                    <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                        <div>
+                            <h2 class="text-4xl tracking-tight text-stone-900 mb-3" style="font-family: 'Cormorant Garamond', serif;">My Work</h2>
+                            <p class="text-sm font-light text-stone-500">A curation of my favorite moments captured recently.</p>
+                        </div>
+                        <a href="https://addie-photos.vercel.app/gallery" class="inline-flex items-center gap-2 text-sm font-light text-stone-900 hover:text-stone-500 transition-colors group">
+                            View entire portfolio
+                            <iconify-icon icon="solar:arrow-right-linear" class="transform group-hover:translate-x-1 transition-transform" stroke-width="1.5"></iconify-icon>
+                        </a>
                     </div>
-                    <a href="https://addie-photos.vercel.app/gallery" class="inline-flex items-center gap-2 text-sm font-light text-stone-900 hover:text-stone-500 transition-colors group">
-                        View entire portfolio
-                        <iconify-icon icon="solar:arrow-right-linear" class="transform group-hover:translate-x-1 transition-transform" stroke-width="1.5"></iconify-icon>
-                    </a>
-                </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                         <div class="flex flex-col gap-4 md:gap-6">
                             <div class="relative group overflow-hidden bg-stone-100 rounded-sm aspect-[3/4]">
@@ -113,7 +113,7 @@
                     <div class="grid md:grid-cols-3 gap-8">
                         <button onclick="openGallery('hayden-megan')" class="group bg-white p-4 rounded-sm shadow-sm border border-stone-100 hover:shadow-md transition-all">
                             <div class="relative aspect-[4/3] overflow-hidden mb-5 bg-stone-100">
-                                <img src="hayden-megan/cover.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                <img src="hayden-megan/COVER-IMAGE.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                                 <div class="absolute inset-0 bg-stone-900/10 group-hover:bg-transparent transition-colors"></div>
                                 <div class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 text-[10px] font-light text-stone-800 rounded-full flex items-center gap-1.5 shadow-sm">
                                     <iconify-icon icon="solar:gallery-linear"></iconify-icon>
@@ -161,6 +161,7 @@
             <iconify-icon icon="solar:close-circle-linear" width="40" stroke-width="1"></iconify-icon>
         </button>
         <img id="lightbox-img" src="" class="max-h-[70vh] max-w-full object-contain mb-8 shadow-2xl">
+        
         <button onclick="downloadSingleImage()" class="inline-flex items-center gap-2 px-8 py-3 bg-white/10 hover:bg-white/20 text-white text-xs uppercase tracking-widest font-light rounded-full backdrop-blur-md transition-colors border border-white/20">
             <iconify-icon icon="solar:download-linear" width="18"></iconify-icon>
             Download High-Res
@@ -216,7 +217,6 @@
             }
         }
 
-        // NEW: Automatically pulls images from the client's folder
         async function showGalleryView(id, config) {
             document.getElementById('gallery-view').classList.remove('hidden');
             document.getElementById('gallery-title').innerText = config.title;
@@ -226,11 +226,9 @@
             grid.innerHTML = '<div class="col-span-full py-20 text-center text-stone-400 uppercase tracking-widest text-xs">Loading Collection...</div>';
             
             try {
-                // Fetch the dynamic JSON from the client folder
                 const response = await fetch(`${id}/photos.json`);
                 const images = await response.json();
                 
-                // Clear and reset the array for the ZIP download
                 currentGalleryImages = [];
                 let gridHTML = '';
 
@@ -251,7 +249,7 @@
                 grid.innerHTML = gridHTML;
             } catch (error) {
                 console.error("Error loading gallery:", error);
-                grid.innerHTML = '<div class="col-span-full py-20 text-center text-red-400 uppercase tracking-widest text-xs">Error loading images. Ensure photos.json exists in the folder.</div>';
+                grid.innerHTML = '<div class="col-span-full py-20 text-center text-red-400 uppercase tracking-widest text-xs">Error loading images. Ensure photos.json exists.</div>';
             }
         }
 
@@ -317,7 +315,7 @@
                 
                 saveAs(content, `${currentGalleryId}.zip`);
             } catch (err) {
-                alert("Download failed. Please check your connection.");
+                alert("Download failed.");
             } finally {
                 btn.disabled = false;
                 btnText.innerText = "Download Collection (ZIP)";
