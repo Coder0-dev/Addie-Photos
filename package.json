@@ -2,6 +2,6 @@
   "name": "addie-m-photography",
   "version": "1.0.0",
   "scripts": {
-    "build": "node gallery/generate-gallery.js"
+    "build": "node gallery/generate-gallery.js && node generate-clients.js"
   }
 }
