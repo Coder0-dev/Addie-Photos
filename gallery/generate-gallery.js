@@ -1,14 +1,13 @@
 const fs = require('fs');
 const path = require('path');
 
-// Target the /gallery folder explicitly
 const galleryDir = path.join(process.cwd(), 'gallery');
 const imageDir = path.join(galleryDir, 'images');
 const outputPath = path.join(galleryDir, 'photos.json');
 
 try {
     if (!fs.existsSync(imageDir)) {
-        console.error("❌ Error: Images folder not found at " + imageDir);
+        console.error("Error: Images folder not found at " + imageDir);
         process.exit(1);
     }
 
@@ -17,8 +16,8 @@ try {
     
     fs.writeFileSync(outputPath, JSON.stringify(images));
     
-    console.log(`✅ Success! Created ${outputPath} with ${images.length} images.`);
+    console.log(`Success! Created ${outputPath} with ${images.length} images.`);
 } catch (err) {
-    console.error("❌ Build Script Failed:", err);
+    console.error("Build Script Failed:", err);
     process.exit(1);
 }
