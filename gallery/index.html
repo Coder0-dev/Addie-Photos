@@ -17,7 +17,6 @@
         ::-webkit-scrollbar-track { background: #fafaf9; }
         ::-webkit-scrollbar-thumb { background: #d6d3d1; border-radius: 4px; }
 
-        /* Hide scrollbar for the custom carousel track */
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
@@ -64,10 +63,10 @@
 
                 <div class="relative w-full">
                     <div id="custom-carousel" class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-6 cursor-grab pb-8">
-                    </div>
+                        </div>
                     
                     <div class="flex items-center justify-between mt-4">
-                        <div id="carousel-counter" class="font-light tracking-[0.2em] text-stone-500 text-sm" style="font-family: 'Outfit', sans-serif;">01 / --</div>
+                        <div id="carousel-counter" class="font-light tracking-[0.2em] text-stone-500 text-sm" style="font-family: 'Outfit', sans-serif;">Loading...</div>
                         <div class="flex gap-6">
                             <button id="prev-btn" class="group p-2 focus:outline-none">
                                 <iconify-icon icon="solar:alt-arrow-left-linear" class="text-2xl text-stone-300 group-hover:text-stone-900 transition-colors"></iconify-icon>
@@ -81,48 +80,42 @@
             </div>
         </section>
 
-       <section id="book" class="py-32 px-6 relative overflow-hidden">
+        <section id="book" class="py-32 px-6 relative overflow-hidden">
             <div class="absolute top-0 right-0 w-1/2 h-full bg-stone-100/30 -z-10 blur-3xl rounded-full transform translate-x-1/2 -translate-y-1/4"></div>
-
             <div class="max-w-4xl mx-auto">
-            <div class="flex justify-center">
-                <div class="md:w-2/3 w-full">
-                <h2 class="text-5xl tracking-tight text-stone-900 mb-6 leading-tight text-center" style="font-family: 'Cormorant Garamond', serif;">Let's create something beautiful.</h2>
-                <p class="text-sm font-light text-stone-500 mb-10 leading-relaxed text-center">
-                    Currently booking for 2026. Please fill out the form with as much detail as possible, and I'll get back to you within 48 hours.
-                </p>
-                <div class="flex justify-center mb-8">
-                    <a id="app-scheduling" href="#" class="custom_button btn-simple active templates_color" style="background-color: rgb(165, 184, 198); text-align: center; display: flex; align-items: center; justify-content: center; cursor: pointer; width: auto; height: 40px; padding: 8px 20px; color: rgb(255, 255, 255); font-size: 15px; font-weight: 400; border-radius: 6px; text-decoration: none; max-width: 200px; visibility: visible; border-color: rgb(197, 194, 205);" alt="Booknow button" target="_blank" data-domain-name="https://capturedbyaddiem.bookafy.com/schedule/?type=iframe&custom_embed=true&locale=en">Lets Book</a>
+                <div class="flex justify-center">
+                    <div class="md:w-2/3 w-full">
+                        <h2 class="text-5xl tracking-tight text-stone-900 mb-6 leading-tight text-center" style="font-family: 'Cormorant Garamond', serif;">Let's create something beautiful.</h2>
+                        <p class="text-sm font-light text-stone-500 mb-10 leading-relaxed text-center">
+                            Currently booking for 2026. Please fill out the form with as much detail as possible, and I'll get back to you within 48 hours.
+                        </p>
+                        <div class="flex justify-center mb-8">
+                            <a id="app-scheduling" href="#" class="custom_button btn-simple active templates_color" style="background-color: rgb(165, 184, 198); text-align: center; display: flex; align-items: center; justify-content: center; cursor: pointer; width: auto; height: 40px; padding: 8px 20px; color: rgb(255, 255, 255); font-size: 15px; font-weight: 400; border-radius: 6px; text-decoration: none; max-width: 200px; visibility: visible; border-color: rgb(197, 194, 205);" target="_blank" data-domain-name="https://capturedbyaddiem.bookafy.com/schedule/?type=iframe&custom_embed=true&locale=en">Lets Book</a>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-4 text-sm font-light text-stone-600 justify-center">
+                                <div class="w-10 h-10 rounded-full bg-white border border-stone-200 flex items-center justify-center text-stone-400">
+                                    <iconify-icon icon="solar:letter-linear" width="18"></iconify-icon>
+                                </div>
+                                addiem@randomemail.com
+                            </div>
+                            <div class="flex items-center gap-4 text-sm font-light text-stone-600 justify-center">
+                                <div class="w-10 h-10 rounded-full bg-white border border-stone-200 flex items-center justify-center text-stone-400">
+                                    <iconify-icon icon="solar:map-point-linear" width="18"></iconify-icon>
+                                </div>
+                                Based in Nampa, Idaho.
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <script id="scheduling_script" type="text/javascript" src="https://app.bookafy.com/popup-code.js"></script>
-                <div class="space-y-6">
-                    <div class="flex items-center gap-4 text-sm font-light text-stone-600 justify-center">
-                    <div class="w-10 h-10 rounded-full bg-white border border-stone-200 flex items-center justify-center text-stone-400">
-                        <iconify-icon icon="solar:letter-linear" width="18" stroke-width="1.5"></iconify-icon>
-                    </div>
-                    addiem@randomemail.com
-                    </div>
-                    <div class="flex items-center gap-4 text-sm font-light text-stone-600 justify-center">
-                    <div class="w-10 h-10 rounded-full bg-white border border-stone-200 flex items-center justify-center text-stone-400">
-                        <iconify-icon icon="solar:map-point-linear" width="18" stroke-width="1.5"></iconify-icon>
-                    </div>
-                    Based in Nampa, Idaho.
-                    </div>
-                </div>
-                </div>
-            </div>
             </div>
         </section>
     </main>
 
     <footer class="border-t border-stone-200/60 bg-[#fafaf9] py-12 px-6">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-            <div class="text-xl tracking-tighter text-stone-900" style="font-family: 'Cormorant Garamond', serif;">
-                Captured By Addie M.
-            </div>
-            <div class="text-[10px] text-stone-400 font-light uppercase tracking-widest text-center">
-                © 2026 Addie M. Photography. Website by Oscar Morales.
-            </div>
+            <div class="text-xl tracking-tighter text-stone-900" style="font-family: 'Cormorant Garamond', serif;">Captured By Addie M.</div>
+            <div class="text-[10px] text-stone-400 font-light uppercase tracking-widest text-center">© 2026 Addie M. Photography. Website by Oscar Morales.</div>
             <div class="flex items-center gap-6 text-stone-400">
                 <a href="#" class="hover:text-stone-900 transition-colors"><iconify-icon icon="solar:camera-linear" width="20"></iconify-icon></a>
                 <a href="#" class="hover:text-stone-900 transition-colors"><iconify-icon icon="solar:link-linear" width="20"></iconify-icon></a>
@@ -131,6 +124,9 @@
     </footer>
 
     <script>
+        /**
+         * AUTO-UPDATING GALLERY LOGIC
+         */
         const carousel = document.getElementById('custom-carousel');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
@@ -139,12 +135,14 @@
         let totalPhotos = 0;
         let autoScrollTimer;
 
-        // NEW AUTOMATED FETCH LOGIC
         async function initGallery() {
             try {
-                // Fetch the list compiled by your build script
+                // We use a relative path that works regardless of trailing slashes in the URL
                 const response = await fetch('./photos.json');
-                if (!response.ok) throw new Error('File not found');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
                 
                 const images = await response.json();
                 totalPhotos = images.length;
@@ -154,19 +152,30 @@
                     return;
                 }
 
+                // Clear any "Loading" or old content
+                carousel.innerHTML = '';
+
                 images.forEach((fileName) => {
                     const div = document.createElement('div');
-                    div.className = 'carousel-item snap-center shrink-0 w-[85%] md:w-[45%] lg:w-[35%] aspect-[4/5] bg-stone-200 rounded-sm overflow-hidden relative group select-none';
-                    // Pull images from your subfolder
-                    div.innerHTML = `<img src="./images/${fileName}" loading="lazy" draggable="false" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-1000 pointer-events-none">`;
+                    div.className = 'carousel-item snap-center shrink-0 w-[85%] md:w-[45%] lg:w-[35%] aspect-[4/5] bg-stone-100 rounded-sm overflow-hidden relative group select-none';
+                    
+                    // We map the source specifically to the /images subfolder
+                    div.innerHTML = `
+                        <img src="./images/${fileName}" 
+                             loading="lazy" 
+                             draggable="false" 
+                             alt="Photography by Addie M"
+                             class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-1000 pointer-events-none">
+                    `;
                     carousel.appendChild(div);
                 });
 
+                // Initialize UI updates
                 updateCounter();
                 startAutoScroll();
             } catch (err) {
                 console.error("Gallery initialization failed:", err);
-                counter.innerText = "Error loading gallery";
+                counter.innerText = "Gallery Unavailable";
             }
         }
 
@@ -177,6 +186,8 @@
         const updateCounter = () => {
             if (totalPhotos === 0) return;
             const step = getScrollStep();
+            if (step === 0) return; // Prevent division by zero if not rendered yet
+
             const currentIndex = Math.round(carousel.scrollLeft / step) + 1;
             const formattedCurrent = String(Math.min(currentIndex, totalPhotos)).padStart(2, '0');
             const formattedTotal = String(totalPhotos).padStart(2, '0');
@@ -185,6 +196,7 @@
 
         const scrollNext = () => {
             const step = getScrollStep();
+            // If at the end, loop back to start
             if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 10) {
                 carousel.scrollTo({ left: 0, behavior: 'smooth' }); 
             } else {
@@ -198,19 +210,19 @@
 
         const startAutoScroll = () => { 
             clearInterval(autoScrollTimer);
-            autoScrollTimer = setInterval(scrollNext, 4000); 
+            autoScrollTimer = setInterval(scrollNext, 5000); 
         };
         const stopAutoScroll = () => clearInterval(autoScrollTimer);
 
+        // Event Listeners
         carousel.addEventListener('scroll', updateCounter);
         nextBtn.addEventListener('click', () => { stopAutoScroll(); scrollNext(); startAutoScroll(); });
         prevBtn.addEventListener('click', () => { stopAutoScroll(); scrollPrev(); startAutoScroll(); });
-
         carousel.addEventListener('mouseenter', stopAutoScroll);
         carousel.addEventListener('mouseleave', startAutoScroll);
 
-        // Run the gallery initialization
-        initGallery();
+        // Run on load
+        window.addEventListener('DOMContentLoaded', initGallery);
     </script>
 </body>
 </html>
