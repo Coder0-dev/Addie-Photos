@@ -135,18 +135,28 @@
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
         const counter = document.getElementById('carousel-counter');
-        const totalPhotos = 100;
+        // 1. Array of Your Actual Photos
+        // Add the exact file names of the images you placed in your 'images' folder
+        const myPortfolioPhotos = [
+            "./images/photo1.jpg",
+            "./images/photo2.jpg",
+            "./images/photo3.jpg",
+            "./images/photo4.jpg",
+            "./images/photo5.jpg"
+            // Just add a comma and a new line for every photo you want to include
+        ];
+        
+        const totalPhotos = myPortfolioPhotos.length;
 
-        // 1. Inject 100 Random Photos
-        for (let i = 1; i <= totalPhotos; i++) {
+        // Loop through your array and inject them into the HTML
+        myPortfolioPhotos.forEach((photoSrc) => {
             const div = document.createElement('div');
             // Responsive sizing: 85% mobile, 45% tablet, 35% desktop
             div.className = 'carousel-item snap-center shrink-0 w-[85%] md:w-[45%] lg:w-[35%] aspect-[4/5] bg-stone-200 rounded-sm overflow-hidden relative group select-none';
             
-            // Fetching reliable placeholder images based on the index
-            div.innerHTML = `<img src="https://picsum.photos/seed/${i * 10}/800/1000" loading="lazy" draggable="false" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-1000 pointer-events-none">`;
+            div.innerHTML = `<img src="${photoSrc}" loading="lazy" draggable="false" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-1000 pointer-events-none">`;
             carousel.appendChild(div);
-        }
+        });
 
         // 2. Carousel Mathematics & State
         let autoScrollTimer;
