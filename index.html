@@ -20,6 +20,10 @@
         ::-webkit-scrollbar-thumb:hover { background: #a8a29e; }
 
         #zip-progress-bg { transition: width 0.4s ease-out; }
+        
+        /* Lightbox transitions */
+        #lightbox { transition: opacity 0.3s ease-in-out; }
+        #lightbox-img { transition: transform 0.3s ease-out; }
     </style>
 </head>
 <body class="bg-[#fafaf9] text-stone-800 antialiased selection:bg-stone-200 selection:text-stone-900" style="font-family: 'Outfit', sans-serif;">
@@ -156,16 +160,35 @@
         </div>
     </div>
 
-    <div id="lightbox" class="fixed inset-0 z-[110] hidden bg-stone-900/98 backdrop-blur-xl flex-col items-center justify-center p-6">
-        <button onclick="closeLightbox()" class="absolute top-8 right-8 text-white/50 hover:text-white transition-colors">
-            <iconify-icon icon="solar:close-circle-linear" width="40" stroke-width="1"></iconify-icon>
-        </button>
-        <img id="lightbox-img" src="" class="max-h-[70vh] max-w-full object-contain mb-8 shadow-2xl">
+    <div id="lightbox" class="fixed inset-0 z-[110] hidden bg-stone-950/98 backdrop-blur-2xl flex flex-col items-center justify-center p-4">
         
-        <button onclick="downloadSingleImage()" class="inline-flex items-center gap-2 px-8 py-3 bg-white/10 hover:bg-white/20 text-white text-xs uppercase tracking-widest font-light rounded-full backdrop-blur-md transition-colors border border-white/20">
-            <iconify-icon icon="solar:download-linear" width="18"></iconify-icon>
-            Download High-Res
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white/40 hover:text-white transition-colors z-[120]">
+            <iconify-icon icon="solar:close-circle-bold" width="36"></iconify-icon>
         </button>
+
+        <div class="relative w-full max-w-5xl flex items-center justify-center group">
+            <button onclick="prevImage()" class="absolute left-0 text-white/20 hover:text-white transition-all p-4 z-[120]">
+                <iconify-icon icon="solar:alt-arrow-left-linear" width="48"></iconify-icon>
+            </button>
+
+            <img id="lightbox-img" src="" class="max-h-[75vh] max-w-full object-contain shadow-2xl rounded-sm">
+
+            <button onclick="nextImage()" class="absolute right-0 text-white/20 hover:text-white transition-all p-4 z-[120]">
+                <iconify-icon icon="solar:alt-arrow-right-linear" width="48"></iconify-icon>
+            </button>
+        </div>
+
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+            <button onclick="closeLightbox()" class="inline-flex items-center gap-2 px-6 py-3 bg-stone-800 text-white text-[11px] uppercase tracking-widest font-light rounded-full border border-stone-700 hover:bg-stone-700 transition-colors">
+                <iconify-icon icon="solar:gallery-linear" width="16"></iconify-icon>
+                Back to Grid
+            </button>
+
+            <button onclick="downloadSingleImage()" class="inline-flex items-center gap-2 px-8 py-3 bg-white text-stone-900 text-[11px] uppercase tracking-widest font-bold rounded-full shadow-lg hover:bg-stone-100 transition-all scale-100 hover:scale-105 active:scale-95">
+                <iconify-icon icon="solar:download-bold" width="18"></iconify-icon>
+                Download High-Res
+            </button>
+        </div>
     </div>
 
     <div id="passwordModal" class="fixed inset-0 z-[100] hidden items-center justify-center px-6">
@@ -248,8 +271,7 @@
 
                 grid.innerHTML = gridHTML;
             } catch (error) {
-                console.error("Error loading gallery:", error);
-                grid.innerHTML = '<div class="col-span-full py-20 text-center text-red-400 uppercase tracking-widest text-xs">Error loading images. Ensure photos.json exists.</div>';
+                grid.innerHTML = '<div class="col-span-full py-20 text-center text-red-400 uppercase tracking-widest text-xs">Error loading images.</div>';
             }
         }
 
@@ -260,14 +282,35 @@
 
         function openLightbox(index) {
             currentImageIndex = index;
-            document.getElementById('lightbox-img').src = currentGalleryImages[index].url;
+            updateLightboxContent();
             document.getElementById('lightbox').classList.remove('hidden');
             document.getElementById('lightbox').classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function updateLightboxContent() {
+            const imgElement = document.getElementById('lightbox-img');
+            imgElement.style.opacity = '0';
+            setTimeout(() => {
+                imgElement.src = currentGalleryImages[currentImageIndex].url;
+                imgElement.style.opacity = '1';
+            }, 150);
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % currentGalleryImages.length;
+            updateLightboxContent();
+        }
+
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
+            updateLightboxContent();
         }
 
         function closeLightbox() {
             document.getElementById('lightbox').classList.add('hidden');
             document.getElementById('lightbox').classList.remove('flex');
+            document.body.style.overflow = 'hidden'; // Keep body fixed as we are still in gallery view
         }
 
         async function downloadSingleImage() {
@@ -280,50 +323,49 @@
         async function downloadZip() {
             const btn = document.getElementById('zip-button');
             const btnText = document.getElementById('zip-text');
-            const btnIcon = document.getElementById('zip-icon');
             const progressBg = document.getElementById('zip-progress-bg');
             const percentLabel = document.getElementById('zip-percentage');
             
-            const total = currentGalleryImages.length;
-            let count = 0;
-
             btn.disabled = true;
             percentLabel.classList.remove('hidden');
-            btnIcon.setAttribute('icon', 'line-md:loading-twotone-loop');
             
             try {
                 const zip = new JSZip();
                 const folder = zip.folder(`${currentGalleryId}-collection`);
-                
+                let count = 0;
+
                 const promises = currentGalleryImages.map(async (img) => {
                     const res = await fetch(img.url);
                     const blob = await res.blob();
                     folder.file(img.name, blob);
                     count++;
-                    const progress = Math.round((count / total) * 100);
-                    btnText.innerText = `Fetching Photos...`;
-                    percentLabel.innerText = `${progress}% Complete`;
+                    const progress = Math.round((count / currentGalleryImages.length) * 100);
+                    btnText.innerText = `Fetching...`;
+                    percentLabel.innerText = `${progress}%`;
                     progressBg.style.width = `${progress}%`;
                 });
                 
                 await Promise.all(promises);
-                btnText.innerText = 'Compressing...';
-                
-                const content = await zip.generateAsync({ type: "blob" }, (meta) => {
-                    if (meta.percent) percentLabel.innerText = `Packaging: ${Math.round(meta.percent)}%`;
-                });
-                
+                const content = await zip.generateAsync({ type: "blob" });
                 saveAs(content, `${currentGalleryId}.zip`);
             } catch (err) {
                 alert("Download failed.");
             } finally {
                 btn.disabled = false;
                 btnText.innerText = "Download Collection (ZIP)";
-                btnIcon.setAttribute('icon', 'solar:folder-zip-linear');
                 progressBg.style.width = '0%';
                 percentLabel.classList.add('hidden');
             }
         }
+
+        // Add keyboard support
+        document.addEventListener('keydown', (e) => {
+            if (document.getElementById('lightbox').classList.contains('flex')) {
+                if (e.key === 'ArrowRight') nextImage();
+                if (e.key === 'ArrowLeft') prevImage();
+                if (e.key === 'Escape') closeLightbox();
+            }
+        });
 
         document.getElementById('galleryPassword').addEventListener('keypress', (e) => {
             if (e.key === 'Enter') verifyPassword();
