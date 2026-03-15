@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Addie McCain | Great Photography</title>
+    <title>Addie McCain | Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     
@@ -15,7 +15,10 @@
         ::-webkit-scrollbar-thumb { background: #d6d3d1; border-radius: 4px; }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        .carousel-item { transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
+        
+        /* Lightbox transitions */
+        #lightbox { transition: opacity 0.3s ease-in-out; }
+        #lightbox-img { transition: transform 0.3s ease-out; }
     </style>
 </head>
 <body class="bg-[#fafaf9] text-stone-800 antialiased selection:bg-stone-200 selection:text-stone-900" style="font-family: 'Outfit', sans-serif;">
@@ -57,38 +60,113 @@
         </section>
     </main>
 
+    <div id="lightbox" class="fixed inset-0 z-[110] hidden bg-stone-950/98 backdrop-blur-2xl flex flex-col items-center justify-center p-4">
+        
+        <div class="absolute top-6 right-6 flex items-center gap-4 z-[120]">
+            <button onclick="closeLightbox()" class="text-white/40 hover:text-white transition-colors">
+                <iconify-icon icon="solar:close-circle-bold" width="36"></iconify-icon>
+            </button>
+        </div>
+
+        <div class="relative w-full max-w-5xl flex items-center justify-center">
+            <button onclick="prevImage()" class="absolute left-0 text-white/20 hover:text-white transition-all p-4 z-[120]">
+                <iconify-icon icon="solar:alt-arrow-left-linear" width="48"></iconify-icon>
+            </button>
+
+            <img id="lightbox-img" src="" oncontextmenu="return false;" class="max-h-[85vh] max-w-full object-contain shadow-2xl rounded-sm select-none">
+
+            <button onclick="nextImage()" class="absolute right-0 text-white/20 hover:text-white transition-all p-4 z-[120]">
+                <iconify-icon icon="solar:alt-arrow-right-linear" width="48"></iconify-icon>
+            </button>
+        </div>
+
+        <div class="mt-8">
+            <button onclick="closeLightbox()" class="inline-flex items-center gap-2 px-6 py-3 bg-stone-800 text-white text-[11px] uppercase tracking-widest font-light rounded-full border border-stone-700 hover:bg-stone-700 transition-colors">
+                <iconify-icon icon="solar:gallery-linear" width="16"></iconify-icon>
+                Back to Grid
+            </button>
+        </div>
+    </div>
+
+    <section id="book" class="py-32 px-6 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-stone-100/30 -z-10 blur-3xl rounded-full transform translate-x-1/2 -translate-y-1/4"></div>
+        <div class="max-w-4xl mx-auto">
+            <div class="flex justify-center">
+                <div class="md:w-2/3 w-full">
+                    <h2 class="text-5xl tracking-tight text-stone-900 mb-6 leading-tight text-center" style="font-family: 'Cormorant Garamond', serif;">Let's create something beautiful.</h2>
+                    <p class="text-sm font-light text-stone-500 mb-10 leading-relaxed text-center">Currently booking for 2026. Please fill out the form with as much detail as possible.</p>
+                    <div class="flex justify-center mb-8">
+                        <a id="app-scheduling" href="#" class="bg-[#a5b8c6] px-8 py-3 text-white rounded-md text-sm font-light hover:opacity-90 transition-opacity">Lets Book</a>
+                    </div>
+                    <div class="space-y-6 flex flex-col items-center">
+                        <div class="flex items-center gap-4 text-sm font-light text-stone-600">
+                            <div class="w-10 h-10 rounded-full bg-white border border-stone-200 flex items-center justify-center text-stone-400">
+                                <iconify-icon icon="solar:letter-linear" width="18"></iconify-icon>
+                            </div>
+                            addiem@randomemail.com
+                        </div>
+                        <div class="flex items-center gap-4 text-sm font-light text-stone-600">
+                            <div class="w-10 h-10 rounded-full bg-white border border-stone-200 flex items-center justify-center text-stone-400">
+                                <iconify-icon icon="solar:map-point-linear" width="18"></iconify-icon>
+                            </div>
+                            Based in Nampa, Idaho.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-stone-200/60 bg-[#fafaf9] py-12 px-6">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="text-xl tracking-tighter text-stone-900" style="font-family: 'Cormorant Garamond', serif;">Captured By Addie M.</div>
+            <div class="text-xs text-stone-400 font-light text-center md:text-left">
+                © 2026 Addie M. Photography. All rights reserved.
+                <br>Website designed by Oscar Morales.
+            </div>
+            <div class="flex items-center gap-4 text-stone-400">
+                <a href="#" class="hover:text-stone-900 transition-colors"><iconify-icon icon="solar:camera-linear" width="20"></iconify-icon></a>
+                <a href="#" class="hover:text-stone-900 transition-colors"><iconify-icon icon="solar:link-linear" width="20"></iconify-icon></a>
+            </div>
+        </div>
+    </footer>
+
     <script>
         const carousel = document.getElementById('custom-carousel');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
         const counter = document.getElementById('carousel-counter');
         
-        // CRITICAL FIX: Explicitly define the base path for your gallery folder
         const GALLERY_BASE = '/gallery/'; 
-        let totalPhotos = 0;
+        let galleryImages = [];
+        let currentImageIndex = 0;
         let autoScrollTimer;
 
         async function initGallery() {
             try {
-                // Fetch using the absolute path to bypass trailing slash issues
                 const response = await fetch(`${GALLERY_BASE}photos.json`);
                 if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 
                 const images = await response.json();
-                totalPhotos = images.length;
+                galleryImages = images;
                 
-                if (totalPhotos === 0) {
+                if (images.length === 0) {
                     counter.innerText = "00 / 00";
                     return;
                 }
 
-                carousel.innerHTML = ''; // Clear loader
-                images.forEach((fileName) => {
+                carousel.innerHTML = ''; 
+                images.forEach((fileName, index) => {
                     const div = document.createElement('div');
-                    div.className = 'carousel-item snap-center shrink-0 w-[85%] md:w-[45%] lg:w-[35%] aspect-[4/5] bg-stone-100 rounded-sm overflow-hidden relative group select-none';
+                    div.className = 'carousel-item snap-center shrink-0 w-[85%] md:w-[45%] lg:w-[35%] aspect-[4/5] bg-stone-100 rounded-sm overflow-hidden relative group select-none cursor-pointer';
+                    div.onclick = () => openLightbox(index);
                     
-                    // Force the image path to use the subfolder
-                    div.innerHTML = `<img src="${GALLERY_BASE}images/${fileName}" loading="lazy" draggable="false" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-1000 pointer-events-none">`;
+                    div.innerHTML = `
+                        <img src="${GALLERY_BASE}images/${fileName}" loading="lazy" draggable="false" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-1000 pointer-events-none">
+                        <div class="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/20 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+                            <iconify-icon icon="solar:maximize-square-linear" class="text-white" width="32"></iconify-icon>
+                        </div>
+                    `;
                     carousel.appendChild(div);
                 });
 
@@ -100,13 +178,51 @@
             }
         }
 
+        // Lightbox Logic
+        function openLightbox(index) {
+            currentImageIndex = index;
+            updateLightboxContent();
+            document.getElementById('lightbox').classList.remove('hidden');
+            document.getElementById('lightbox').classList.add('flex');
+            document.body.style.overflow = 'hidden';
+            stopAutoScroll();
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.add('hidden');
+            document.getElementById('lightbox').classList.remove('flex');
+            document.body.style.overflow = 'auto';
+            startAutoScroll();
+        }
+
+        function updateLightboxContent() {
+            const imgElement = document.getElementById('lightbox-img');
+            const fileName = galleryImages[currentImageIndex];
+            imgElement.style.opacity = '0';
+            setTimeout(() => {
+                imgElement.src = `${GALLERY_BASE}images/${fileName}`;
+                imgElement.style.opacity = '1';
+            }, 150);
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+            updateLightboxContent();
+        }
+
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+            updateLightboxContent();
+        }
+
+        // Carousel Scroll Logic
         const getScrollStep = () => carousel.children[0]?.offsetWidth + 24 || 0;
 
         const updateCounter = () => {
             const step = getScrollStep();
             if (step === 0) return;
             const currentIndex = Math.round(carousel.scrollLeft / step) + 1;
-            counter.innerText = `${String(Math.min(currentIndex, totalPhotos)).padStart(2, '0')} / ${String(totalPhotos).padStart(2, '0')}`;
+            counter.innerText = `${String(Math.min(currentIndex, galleryImages.length)).padStart(2, '0')} / ${String(galleryImages.length).padStart(2, '0')}`;
         };
 
         const scrollNext = () => {
@@ -125,59 +241,16 @@
         nextBtn.addEventListener('click', () => { stopAutoScroll(); scrollNext(); startAutoScroll(); });
         prevBtn.addEventListener('click', () => { stopAutoScroll(); scrollPrev(); startAutoScroll(); });
 
+        // Keyboard Support
+        document.addEventListener('keydown', (e) => {
+            if (document.getElementById('lightbox').classList.contains('flex')) {
+                if (e.key === 'ArrowRight') nextImage();
+                if (e.key === 'ArrowLeft') prevImage();
+                if (e.key === 'Escape') closeLightbox();
+            }
+        });
+
         initGallery();
     </script>
-    <!-- Booking Section -->
-        <section id="book" class="py-32 px-6 relative overflow-hidden">
-            <!-- Decorative background element -->
-            <div class="absolute top-0 right-0 w-1/2 h-full bg-stone-100/30 -z-10 blur-3xl rounded-full transform translate-x-1/2 -translate-y-1/4"></div>
-
-            <div class="max-w-4xl mx-auto">
-            <div class="flex justify-center">
-                <div class="md:w-2/3 w-full">
-                <h2 class="text-5xl tracking-tight text-stone-900 mb-6 leading-tight text-center" style="font-family: 'Cormorant Garamond', serif;">Let's create something beautiful.</h2>
-                <p class="text-sm font-light text-stone-500 mb-10 leading-relaxed text-center">
-                    Currently booking for 2026. Please fill out the form with as much detail as possible, and I'll get back to you within 48 hours.
-                </p>
-                <!--Button-->
-                <div class="flex justify-center mb-8">
-                    <a id="app-scheduling" href="#" class="custom_button btn-simple active templates_color" style="background-color: rgb(165, 184, 198); text-align: center; display: flex; align-items: center; justify-content: center; cursor: pointer; width: auto; height: 40px; padding: 8px 20px; color: rgb(255, 255, 255); font-size: 15px; font-weight: 400; border-radius: 6px; text-decoration: none; max-width: 200px; visibility: visible; border-color: rgb(197, 194, 205);" alt="Booknow button" target="_blank" data-domain-name="https://capturedbyaddiem.bookafy.com/schedule/?type=iframe&custom_embed=true&locale=en">Lets Book</a>
-                </div>
-                <script id="scheduling_script" type="text/javascript" src="https://app.bookafy.com/popup-code.js"></script>
-                <div class="space-y-6">
-                    <div class="flex items-center gap-4 text-sm font-light text-stone-600 justify-center">
-                    <div class="w-10 h-10 rounded-full bg-white border border-stone-200 flex items-center justify-center text-stone-400">
-                        <iconify-icon icon="solar:letter-linear" width="18" stroke-width="1.5"></iconify-icon>
-                    </div>
-                    addiem@randomemail.com
-                    </div>
-                    <div class="flex items-center gap-4 text-sm font-light text-stone-600 justify-center">
-                    <div class="w-10 h-10 rounded-full bg-white border border-stone-200 flex items-center justify-center text-stone-400">
-                        <iconify-icon icon="solar:map-point-linear" width="18" stroke-width="1.5"></iconify-icon>
-                    </div>
-                    Based in Nampa, Idaho.
-                    </div>
-                </div>
-                </div>
-            </div>
-            </div>
-        </section>
-    <footer class="border-t border-stone-200/60 bg-[#fafaf9] py-12 px-6">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-            <div class="text-xl tracking-tighter text-stone-900" style="font-family: 'Cormorant Garamond', serif;">
-                Captured By Addie M.
-            </div>
-            <div class="text-xs text-stone-400 font-light">
-                © 2026 Addie M. Photography. All rights reserved.
-                <br>
-                <center>Website designed by Oscar Morales.</center>
-            </div>
-            <div class="flex items-center gap-4 text-stone-400">
-                <a href="https://www.instagram.com/captured.by.addiem" class="hover:text-stone-900 transition-colors"><iconify-icon icon="solar:camera-linear" width="20" stroke-width="1.5"></iconify-icon></a>
-                <a href="https://capturedbyaddiemidaho.weebly.com/" class="hover:text-stone-900 transition-colors"><iconify-icon icon="solar:link-linear" width="20" stroke-width="1.5"></iconify-icon></a>
-            </div>
-        </div>
-    </footer>
-    </div>
 </body>
 </html>
