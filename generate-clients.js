@@ -1,10 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
-// Folders to skip
 const ignoreFolders = ['node_modules', '.git', 'gallery', 'cover-photos'];
-
 const rootDir = process.cwd();
+
 const folders = fs.readdirSync(rootDir).filter(file => {
     const fullPath = path.join(rootDir, file);
     return fs.statSync(fullPath).isDirectory() && !ignoreFolders.includes(file) && !file.startsWith('.');
@@ -16,7 +15,6 @@ folders.forEach(folder => {
     const folderPath = path.join(rootDir, folder);
     const files = fs.readdirSync(folderPath);
     
-    // Filter images, but EXCLUDE the specific COVER-IMAGE.jpg
     const images = files.filter(file => 
         /\.(jpg|jpeg|png|webp|avif)$/i.test(file) && 
         file.toUpperCase() !== 'COVER-IMAGE.JPG'
@@ -24,13 +22,11 @@ folders.forEach(folder => {
 
     if (images.length > 0) {
         fs.writeFileSync(path.join(folderPath, 'photos.json'), JSON.stringify(images));
-        console.log(`✅ Client Gallery Updated: ${folder}/photos.json (${images.length} images)`);
+        console.log(`Client Gallery Updated: ${folder}/photos.json (${images.length} images)`);
     }
 
-    // Read info.txt and extract the data
     const infoPath = path.join(folderPath, 'info.txt');
     if (fs.existsSync(infoPath)) {
-        // Split by newlines, handling both Mac/Linux (\n) and Windows (\r\n) line endings
         const lines = fs.readFileSync(infoPath, 'utf-8').split(/\r?\n/).map(line => line.trim());
         
         clientsData.push({
@@ -39,11 +35,10 @@ folders.forEach(folder => {
             category: lines[1] || 'Photography',
             fullDate: lines[2] || '',
             shortDate: lines[3] || '',
-            password: lines[4] || 'hello' // Fallback to 'hello' if line 5 is missing
+            password: lines[4] || 'hello'
         });
     }
 });
 
-// Write the master clients.json file for the homepage to read
 fs.writeFileSync(path.join(rootDir, 'clients.json'), JSON.stringify(clientsData));
-console.log(`✅ Master clients.json generated with ${clientsData.length} galleries!`);
+console.log(`Master clients.json generated with ${clientsData.length} galleries!`);
