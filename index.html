@@ -232,7 +232,7 @@
         let currentImageIndex = 0;
         let galleryConfig = {};
 
-        document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', async () => {
             try {
                 const res = await fetch('clients.json');
                 const clients = await res.json();
@@ -246,12 +246,25 @@
                         subtitle: client.fullDate
                     };
 
+                    // Check if the gallery requires a password
+                    const isLocked = client.password !== 'nopass';
+                    
+                    // Create the overlay HTML only if it's locked
+                    const lockOverlay = isLocked ? `
+                        <div class="absolute inset-0 bg-stone-900/40 flex items-center justify-center backdrop-blur-[1px] transition-all duration-500 group-hover:bg-stone-900/60 z-10">
+                            <iconify-icon icon="solar:lock-keyhole-minimalistic-linear" width="48" class="text-white/90"></iconify-icon>
+                        </div>
+                    ` : '';
+
                     html += `
                     <button onclick="openGallery('${client.id}')" class="group bg-white p-4 rounded-sm shadow-sm border border-stone-100 hover:shadow-md transition-all text-left w-full block">
                         <div class="relative aspect-[4/3] overflow-hidden mb-5 bg-stone-100">
                             <img src="${client.id}/COVER-IMAGE.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                            <div class="absolute inset-0 bg-stone-900/10 group-hover:bg-transparent transition-colors"></div>
-                            <div class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 text-[10px] font-light text-stone-800 rounded-full flex items-center gap-1.5 shadow-sm">
+                            <div class="absolute inset-0 bg-stone-900/10 group-hover:bg-transparent transition-colors z-0"></div>
+                            
+                            ${lockOverlay}
+                            
+                            <div class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 text-[10px] font-light text-stone-800 rounded-full flex items-center gap-1.5 shadow-sm z-20">
                                 <iconify-icon icon="solar:gallery-linear"></iconify-icon>
                                 View Gallery
                             </div>
@@ -268,7 +281,7 @@
                 document.getElementById('client-cards-container').innerHTML = '<p class="text-center text-stone-500 w-full col-span-3 text-sm">Galleries are currently loading or unavailable.</p>';
             }
         });
-
+        
         function openGallery(id) {
             currentGalleryId = id;
             const config = galleryConfig[id];
