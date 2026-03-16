@@ -246,13 +246,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                         subtitle: client.fullDate
                     };
 
-                    // Check if the gallery is locked (password is NOT "nopass")
+                    // Check if the gallery requires a password
                     const isLocked = client.password !== 'nopass';
                     
-                    // Lighter transparency (20%) and subtle icon (40%)
+                    // Create the overlay HTML only if it's locked
                     const lockOverlay = isLocked ? `
-                        <div class="absolute inset-0 bg-stone-900/20 flex items-center justify-center backdrop-blur-[1px] transition-all duration-500 group-hover:bg-stone-900/40 z-10">
-                            <iconify-icon icon="solar:lock-keyhole-minimalistic-linear" width="42" class="text-white/40 group-hover:text-white/80 transition-colors"></iconify-icon>
+                        <div class="absolute inset-0 bg-stone-900/40 flex items-center justify-center backdrop-blur-[1px] transition-all duration-500 group-hover:bg-stone-900/60 z-10">
+                            <iconify-icon icon="solar:lock-keyhole-minimalistic-linear" width="48" class="text-white/90"></iconify-icon>
                         </div>
                     ` : '';
 
@@ -281,20 +281,16 @@ document.addEventListener('DOMContentLoaded', async () => {
                 document.getElementById('client-cards-container').innerHTML = '<p class="text-center text-stone-500 w-full col-span-3 text-sm">Galleries are currently loading or unavailable.</p>';
             }
         });
-                container.innerHTML = html;
-            } catch (error) {
-                console.error("Error loading client galleries:", error);
-                document.getElementById('client-cards-container').innerHTML = '<p class="text-center text-stone-500 w-full col-span-3 text-sm">Galleries are currently loading or unavailable.</p>';
-            }
-        });
         
         function openGallery(id) {
             currentGalleryId = id;
             const config = galleryConfig[id];
 
+            // Check if the password is set to "nopass"
             if (config && config.password === 'nopass') {
                 showGalleryView(id, config);
             } else {
+                // Otherwise, show the password modal as usual
                 const modal = document.getElementById('passwordModal');
                 modal.classList.remove('hidden');
                 modal.classList.add('flex');
