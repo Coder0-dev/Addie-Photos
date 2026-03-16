@@ -289,7 +289,7 @@
         function verifyPassword() {
             const input = document.getElementById('galleryPassword').value;
             const config = galleryConfig[currentGalleryId];
-            if (config && input === config.password) {
+            if (config && (config.password === "nopass" || input === config.password)) {
                 closeModal();
                 showGalleryView(currentGalleryId, config);
             } else {
