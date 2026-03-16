@@ -271,13 +271,20 @@
 
         function openGallery(id) {
             currentGalleryId = id;
-            const modal = document.getElementById('passwordModal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            document.body.style.overflow = 'hidden';
-            document.getElementById('galleryPassword').focus();
-        }
+            const config = galleryConfig[id];
 
+            // Check if the password is set to "nopass"
+            if (config && config.password === 'nopass') {
+                showGalleryView(id, config);
+            } else {
+                // Otherwise, show the password modal as usual
+                const modal = document.getElementById('passwordModal');
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+                document.getElementById('galleryPassword').focus();
+            }
+        }
         function closeModal() {
             document.getElementById('passwordModal').classList.add('hidden');
             document.getElementById('passwordModal').classList.remove('flex');
